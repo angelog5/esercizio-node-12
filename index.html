@@ -1,0 +1,30 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planets Dropdown</title>
+  </head>
+  <body>
+    <h1>Planets Dropdown</h1>
+    <select id="planets-dropdown">
+      <option value="">Select a planet</option>
+    </select>
+
+    <script>
+      async function fetchPlanets() {
+        const response = await fetch("/api/planets");
+        const planets = await response.json();
+        const dropdown = document.getElementById("planets-dropdown");
+
+        planets.forEach((planet) => {
+          const option = document.createElement("option");
+          option.value = planet.id;
+          option.textContent = planet.name;
+          dropdown.appendChild(option);
+        });
+      }
+
+      fetchPlanets();
+    </script>
+  </body>
+</html>
